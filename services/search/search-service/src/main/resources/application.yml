@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: search-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=search}
+    username: ${DB_USER:search_svc}
+    password: ${DB_PASSWORD:search_svc}
+  flyway:
+    schemas: search
+    default-schema: search
+    locations: classpath:db/migration/search
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8180}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: underwriting-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=underwriting}
+    username: ${DB_USER:underwriting_svc}
+    password: ${DB_PASSWORD:underwriting_svc}
+  flyway:
+    schemas: underwriting
+    default-schema: underwriting
+    locations: classpath:db/migration/underwriting
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8130}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

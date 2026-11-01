@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: notifications-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=notifications}
+    username: ${DB_USER:notifications_svc}
+    password: ${DB_PASSWORD:notifications_svc}
+  flyway:
+    schemas: notifications
+    default-schema: notifications
+    locations: classpath:db/migration/notifications
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8160}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

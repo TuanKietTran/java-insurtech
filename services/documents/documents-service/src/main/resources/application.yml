@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: documents-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=documents}
+    username: ${DB_USER:documents_svc}
+    password: ${DB_PASSWORD:documents_svc}
+  flyway:
+    schemas: documents
+    default-schema: documents
+    locations: classpath:db/migration/documents
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8105}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

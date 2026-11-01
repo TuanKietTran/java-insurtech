@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: rules-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=rules}
+    username: ${DB_USER:rules_svc}
+    password: ${DB_PASSWORD:rules_svc}
+  flyway:
+    schemas: rules
+    default-schema: rules
+    locations: classpath:db/migration/rules
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8104}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

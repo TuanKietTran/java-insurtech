@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: billing-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=billing}
+    username: ${DB_USER:billing_svc}
+    password: ${DB_PASSWORD:billing_svc}
+  flyway:
+    schemas: billing
+    default-schema: billing
+    locations: classpath:db/migration/billing
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8140}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

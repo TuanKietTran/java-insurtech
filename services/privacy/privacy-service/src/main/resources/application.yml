@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: privacy-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=privacy}
+    username: ${DB_USER:privacy_svc}
+    password: ${DB_PASSWORD:privacy_svc}
+  flyway:
+    schemas: privacy
+    default-schema: privacy
+    locations: classpath:db/migration/privacy
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8170}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

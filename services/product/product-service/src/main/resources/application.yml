@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: product-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=product}
+    username: ${DB_USER:product_svc}
+    password: ${DB_PASSWORD:product_svc}
+  flyway:
+    schemas: product
+    default-schema: product
+    locations: classpath:db/migration/product
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8110}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

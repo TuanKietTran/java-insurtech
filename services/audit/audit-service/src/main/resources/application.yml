@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: audit-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=audit}
+    username: ${DB_USER:audit_svc}
+    password: ${DB_PASSWORD:audit_svc}
+  flyway:
+    schemas: audit
+    default-schema: audit
+    locations: classpath:db/migration/audit
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8102}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true

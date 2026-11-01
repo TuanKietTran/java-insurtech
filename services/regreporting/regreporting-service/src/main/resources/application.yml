@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: regreporting-service
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/insurtech?currentSchema=regreporting}
+    username: ${DB_USER:regreporting_svc}
+    password: ${DB_PASSWORD:regreporting_svc}
+  flyway:
+    schemas: regreporting
+    default-schema: regreporting
+    locations: classpath:db/migration/regreporting
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${SERVER_PORT:8171}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
